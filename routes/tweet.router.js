@@ -17,15 +17,15 @@ router.post("/create-tweet", async (req, res) => {
 
 // READ ALL
 
-// router.get("all-tweet", async (req, res) => {
-//   try {
-//     const allTweet = await TweetModel.find();
+router.get("/all-tweet", async (req, res) => {
+  try {
+    const allTweet = await TweetModel.find();
 
-//     return res.status(200).json(allTweet);
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json(error);
-//   }
-// });
+    return res.status(200).json(allTweet);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
 
 module.exports = router;
