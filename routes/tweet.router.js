@@ -44,4 +44,24 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// EDIT
+
+router.patch("/edit/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const editTweet = await TweetModel.findOneAndUpdate(
+      { _id: id },
+      { ...req.body },
+      { new: true }
+    );
+
+    return res.status(200).json(editTweet);
+  } catch (err) {
+    console.log(err);
+
+    return res.status(500).json(err);
+  }
+});
+
 module.exports = router;
