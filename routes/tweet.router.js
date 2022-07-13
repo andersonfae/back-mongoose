@@ -28,4 +28,20 @@ router.get("/all-tweet", async (req, res) => {
   }
 });
 
+// READ DETAIL
+
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const tweet = await TweetModel.findOne({ _id: id });
+
+    return res.status(200).json(tweet);
+  } catch (err) {
+    console.log(err);
+
+    return res.status(500).json(err);
+  }
+});
+
 module.exports = router;
