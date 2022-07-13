@@ -64,4 +64,17 @@ router.patch("/edit/:id", async (req, res) => {
   }
 });
 
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedTweet = await TweetModel.deleteOne({ _id: id });
+
+    return res.status(200).json(deletedTweet);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
+  }
+});
+
 module.exports = router;
