@@ -1,5 +1,7 @@
 const router = require("express").Router();
 
+const { response } = require("express");
+const { STATES } = require("mongoose");
 const TweetModel = require("../models/Tweet.model");
 
 // CREATE
@@ -34,7 +36,7 @@ router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
-    const tweet = await TweetModel.findOne({ _id: id });
+    const tweet = await TweetModel.findOne({ _id: id }).populate("cryptos");
 
     return res.status(200).json(tweet);
   } catch (err) {
@@ -63,6 +65,8 @@ router.patch("/edit/:id", async (req, res) => {
     return res.status(500).json(err);
   }
 });
+
+// DELETE
 
 router.delete("/delete/:id", async (req, res) => {
   try {
